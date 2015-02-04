@@ -1,1 +1,0 @@
-# has-dns-propogated

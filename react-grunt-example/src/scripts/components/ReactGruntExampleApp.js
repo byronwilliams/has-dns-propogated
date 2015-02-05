@@ -8,7 +8,7 @@ var Navigation = require('react-router').Navigation;
 // CSS
 require('../../styles/normalize.css');
 require('../../styles/main.css');
-
+/*
 var exampleResponse = {
     "Passing":[
         {"Name":"OpenDNS.A","TTL":300},
@@ -23,7 +23,7 @@ var exampleResponse = {
     ],
     "Expected":"178.62.118.87","Type":"a"
 };
-
+*/
 var FindOutButton = React.createClass({
   render: function() {
     return (
@@ -38,24 +38,18 @@ var SubmitForm = React.createClass({
     handleCheckSubmit: function(comment) {
           var site = this.refs.site.getDOMNode().value.trim();
           var ip = this.refs.ip.getDOMNode().value.trim();
-          //var expectedValue = this.refs.expectedValue.getDOMNode().value.trim();
 
-          //this.replaceWith('check', {}, {'result': exampleResponse});
-          //TODO post as get
-          // API domain http://dns.reactor10.com:7777
-          // GET params ?fqdn=112percent.com&type=a&expected=178.62.118.87
           // A and Cname types dropdown
-          /*
           $.ajax({
             url: 'http://dns.reactor10.com:7777',
             type: 'get',
+            dataType: "json",
             data:{
                 'expected': ip,
                 'type': 'a',
                 'fqdn': site
             },
             success: function(data) {
-                console.log(data);
                 this.replaceWith('check', {}, {'result': data});
 
             }.bind(this),
@@ -63,7 +57,6 @@ var SubmitForm = React.createClass({
               console.error(this.props.url, status, err.toString());
             }.bind(this)
           });
-          */
       },
       render: function() {
         return (

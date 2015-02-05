@@ -9,49 +9,53 @@ var State = require('react-router').State;
 // CSS
 require('../../styles/normalize.css');
 require('../../styles/main.css');
-/*
 
-var exampleResponse = {
-    "Passing":[
-        {"Name":"OpenDNS.A","TTL":300},
-        {"Name":"OpenDNS.B","TTL":201},
-        {"Name":"Google.A","TTL":201},
-        {"Name":"Google.B","TTL":294},
-        {"Name":"Norton.A","TTL":202},
-        {"Name":"Comodo.A","TTL":300},
-    ],
-    "Failing":[
-        {"Name":"OpenDNS.A","TTL":300}
-    ],
-    "Expected":"178.62.118.87",
-    "Type":"a"
-};
-var Expected = React.createClass({
+var FailingDNS = React.createClass({
   render: function() {
-
+      var items = {};
+      this.props.results.forEach(function(result) {
+        items['result-' + result.Name] = <li>{result.Name}</li>;
+      });
+      return (
+        <div>
+            <h3>Failing DNS lookups</h3>
+            <ol>
+                {items}
+            </ol>
+        </div>
+      );
   }
 });
 
-var Failing = React.createClass({
+var PassingDNS = React.createClass({
   render: function() {
-
-  }
-});
-*/
-
-
-var Passing = React.createClass({
-  render: function() {
-
+      var items = {};
+      this.props.results.forEach(function(result) {
+        items['result-' + result.Name] = <li>{result.Name}</li>;
+      });
+      return (
+        <div>
+            <h3>Passing DNS lookups</h3>
+        <ol>
+            {items}
+        </ol>
+        </div>
+      );
   }
 });
 
 var CheckApp = React.createClass({
-        mixins: [ State ],
+        mixins: [State],
         render: function() {
             var result = this.getQuery().result;
+            var passing = result.Passing || [];
+            var failing = result.Failing || [];
+
             return (
-                <Passing />
+                <div>
+                <PassingDNS results={passing} />
+                <FailingDNS results={failing} />
+                </div>
             );
         }
 });

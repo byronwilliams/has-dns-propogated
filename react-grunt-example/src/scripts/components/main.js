@@ -1,11 +1,11 @@
-var ReactGruntExampleApp = require('./ReactGruntExampleApp');
+var ReactGruntExampleApp = require('./Submit');
 var CheckApp = require('./CheckApp');
 
 var React = require('react');
 var Router = require('react-router');
 var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
-var Link = Router.Link
+var Link = Router.Link;
 var RouteHandler = Router.RouteHandler;
 
 var content = document.getElementById('content');
@@ -14,7 +14,6 @@ var App = React.createClass({
   render: function () {
     return (
       <div>
-        {/* this is the important part */}
         <RouteHandler/>
       </div>
     );

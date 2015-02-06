@@ -27,7 +27,7 @@ var exampleResponse = {
 var FindOutButton = React.createClass({
   render: function() {
     return (
-        <a className='btn' onClick={this.props.onCheckSubmit}>Find Out</a>
+        <a className='btn btn-default' onClick={this.props.onCheckSubmit}>Find Out</a>
     );
   }
 });
@@ -36,37 +36,30 @@ var FindOutButton = React.createClass({
 var SubmitForm = React.createClass({
     mixins: [Navigation],
     handleCheckSubmit: function(comment) {
-          var site = this.refs.site.getDOMNode().value.trim();
-          var ip = this.refs.ip.getDOMNode().value.trim();
+            var site = this.refs.site.getDOMNode().value.trim();
+            var ip = this.refs.ip.getDOMNode().value.trim();
+            var type = this.refs.type.getDOMNode().value.trim();
+            // move to the correct url
+            this.replaceWith('check', {}, {
+                'site': site,
+                'ip': ip,
+                'type': type
+            });
 
-          // A and Cname types dropdown
-          $.ajax({
-            url: 'http://dns.reactor10.com:7777',
-            type: 'get',
-            dataType: "json",
-            data:{
-                'expected': ip,
-                'type': 'a',
-                'fqdn': site
-            },
-            success: function(data) {
-                this.replaceWith('check', {}, {'result': data});
-
-            }.bind(this),
-            error: function(xhr, status, err) {
-              console.error(this.props.url, status, err.toString());
-            }.bind(this)
-          });
       },
       render: function() {
         return (
           <div className="">
             <h3>Has my websites DNS been updated?</h3>
-            <form className="">
-              <input type="text" placeholder="example.com" ref="site" />
-              <input type="text" placeholder="ip address" ref="ip" />
-
+            <form className="form-inline">
+                <input className="form-control" type="text" placeholder="example.com" ref="site" />
+                <input className="form-control" type="text" placeholder="ip address" ref="ip" />
+                <select className="form-control" ref="type">
+                    <option>A</option>
+                    <option>CName</option>
+                </select>
             </form>
+
             <FindOutButton onCheckSubmit={this.handleCheckSubmit}/>
           </div>
         );
@@ -77,7 +70,6 @@ var ReactGruntExampleApp = React.createClass({
   render: function() {
     return (
       <div className='jumbotron'>
-        <h1>Has it propgated yet</h1>
         <SubmitForm />
       </div>
     );

@@ -52,7 +52,8 @@ var CheckApp = React.createClass({
           failing: []
         };
         },
-        componentDidMount: function() {
+        lookUpDNS: function() {
+            console.log('polling')
             var site = this.getQuery().site;
             var ip = this.getQuery().ip;
             var type = this.getQuery().type;
@@ -79,6 +80,12 @@ var CheckApp = React.createClass({
                   console.error(this.props.url, status, err.toString());
                 }.bind(this)
             });
+        },
+        componentDidMount: function() {
+            // polling code
+            this.lookUpDNS();
+            setInterval(this.lookUpDNS, 10000);
+
         },
         render: function() {
             // call could take up to 2secs

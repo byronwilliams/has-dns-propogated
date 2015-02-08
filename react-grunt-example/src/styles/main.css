@@ -1,7 +1,14 @@
 body {
     background-color: #f3f5f8;
+    font-family: 'Varela Round', sans-serif;
 }
-.jumbotron{
+
+.btn {
+    border-color: #3dc9b3 !important;
+    background-color: #3dc9b3 !important;
+}
+
+.jumbotron {
      background: url('../images/hero-bg.jpg') no-repeat center center !important;
 }
 

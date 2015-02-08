@@ -14,14 +14,19 @@ var FailingDNS = React.createClass({
   render: function() {
       var items = {};
       this.props.results.forEach(function(result) {
-        items['result-' + result.Name] = <li>{result.Name}</li>;
+        items[result.Name] = <li className="list-group-item alert alert-danger">
+            <div className="row">
+                <div className="col-xs-offset-2 col-xs-6">{result.Name}</div>
+                <div className="col-xs-2">{result.TTL}</div>
+            </div>
+            </li>;
       });
       return (
         <div>
             <h3>Failing DNS lookups</h3>
-            <ol>
+            <ul className="list-group container">
                 {items}
-            </ol>
+            </ul>
         </div>
       );
   }
@@ -31,14 +36,18 @@ var PassingDNS = React.createClass({
   render: function() {
       var items = {};
       this.props.results.forEach(function(result) {
-        items['result-' + result.Name] = <li>{result.Name}</li>;
+        items[result.Name] = <li className="list-group-item">
+            <div className="row">
+                <div className="col-xs-offset-2 col-xs-6">{result.Name}</div>
+            </div>
+            </li>;
       });
       return (
         <div>
             <h3>Passing DNS lookups</h3>
-        <ol>
-            {items}
-        </ol>
+            <ul className="list-group container">
+                {items}
+            </ul>
         </div>
       );
   }
@@ -106,10 +115,19 @@ var CheckApp = React.createClass({
             // call could take up to 2secs
             // with upto 28 results
             return (
-                <div>
-                <PassingDNS results={this.state.passing} />
-                <FailingDNS results={this.state.failing} />
+                <div className="jumbotron">
+                    <div className="container">
+                      <div className="row">
+                        <div className="col-md-12">
+                          <div className="text-center">
+                                <PassingDNS results={this.state.passing} />
+                                <FailingDNS results={this.state.failing} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
+
             );
         }
 });

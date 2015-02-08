@@ -43,7 +43,22 @@ var PassingDNS = React.createClass({
       );
   }
 });
-
+/*
+var exampleResponse = {
+    "Passing":[
+        {"Name":"OpenDNS.A","TTL":300},
+        {"Name":"OpenDNS.B","TTL":201},
+        {"Name":"Google.A","TTL":201},
+        {"Name":"Google.B","TTL":294},
+        {"Name":"Norton.A","TTL":202},
+        {"Name":"Comodo.A","TTL":300},
+    ],
+    "Failing":[
+        {"Name":"OpenDNS.A","TTL":300}
+    ],
+    "Expected":"178.62.118.87","Type":"a"
+};
+*/
 var CheckApp = React.createClass({
         mixins: [State],
         getInitialState: function() {

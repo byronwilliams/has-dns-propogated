@@ -23,18 +23,26 @@ var FindOutButton = React.createClass({
 var SubmitForm = React.createClass({
     mixins: [Navigation],
     handleCheckSubmit: function(comment) {
-            var site = this.refs.site.getDOMNode().value.trim();
-            var ip = this.refs.ip.getDOMNode().value.trim();
+            var site = this.refs.site.getDOMNode().value.trim()
+            var ip = this.refs.ip.getDOMNode().value.trim()
             var type = this.refs.type.getDOMNode().value.trim();
-            // move to the correct url
-            this.replaceWith('check', {}, {
-                'site': site,
-                'ip': ip,
-                'type': type
-            });
+
+
+            if (site && ip) {
+                // move to the correct url
+                this.replaceWith('check', {}, {
+                    'site': site,
+                    'ip': ip,
+                    'type': type
+                });
+            }
+
+            // set warning states
+            this.forceUpdate();
 
       },
       render: function() {
+        console.log('rendering')
         return (
           <div className="col-md-6 col-md-offset-3">
             <h1>Has DNS updated?</h1>

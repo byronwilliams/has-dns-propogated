@@ -45,7 +45,7 @@ var SubmitForm = React.createClass({
         console.log('rendering')
         return (
           <div className="col-md-6 col-md-offset-3">
-            <h1>Has DNS updated?</h1>
+            <h1>Has DNS Updated?</h1>
             <form className="form-group">
                 <label for="siteEntry">Site</label>
                 <input id="siteEntry" className="form-control" type="text" placeholder="example.com" ref="site" />

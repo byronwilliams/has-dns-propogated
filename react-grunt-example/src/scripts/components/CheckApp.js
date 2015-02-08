@@ -129,6 +129,7 @@ var CheckApp = React.createClass({
             return (
                 <div className="jumbotron">
                     <div className="container">
+                    <a className='btn btn-primary btn-md' href="/">Check Another Site</a>
                       <div className="row">
                         <div className="col-md-12">
                           <div className="text-center">

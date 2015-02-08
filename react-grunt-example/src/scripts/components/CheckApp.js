@@ -73,7 +73,8 @@ var CheckApp = React.createClass({
         getInitialState: function() {
         return {
           passing: [],
-          failing: []
+          failing: [],
+          pollInterval: 10000
         };
         },
         lookUpDNS: function() {
@@ -93,9 +94,20 @@ var CheckApp = React.createClass({
                 },
                 success: function(data) {
                 if (this.isMounted()) {
-                   this.setState({
+                    var ttl = data.Failing.map(function(result) {
+                        return result.TTL;
+                    }).reduce(function(previousValue, currentValue, index, array) {
+                        if (previousValue < currentValue) {
+                            return previousValue;
+                        } else {
+                            return currentValue;
+                        }
+                    });
+
+                    this.setState({
                       passing: data.Passing,
-                      failing: data.Failing
+                      failing: data.Failing,
+                      pollInterval: ttl * 1000
                     });
                 }
 
@@ -108,7 +120,7 @@ var CheckApp = React.createClass({
         componentDidMount: function() {
             // polling code
             this.lookUpDNS();
-            setInterval(this.lookUpDNS, 10000);
+            setInterval(this.lookUpDNS,  this.state.pollInterval);
 
         },
         render: function() {
